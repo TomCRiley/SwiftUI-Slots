@@ -21,7 +21,11 @@ struct ContentView: View {
             
             Spacer()
             
-            Text(String(score))
+            Text(String("Cash: \(score)"))
+                .padding(/*@START_MENU_TOKEN@*/.horizontal, 25.0/*@END_MENU_TOKEN@*/)
+                .padding(.vertical, 10.0)
+                .background(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(15)
             
             Spacer()
             
