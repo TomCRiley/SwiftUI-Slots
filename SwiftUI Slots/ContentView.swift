@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State var score = 0
+    @State var slot1 = 1
+    @State var slot2 = 1
+    @State var slot3 = 1
+
     
     var body: some View {
         
@@ -17,12 +21,13 @@ struct ContentView: View {
             
             Text("SwiftUI Slots!")
                 .font(.largeTitle)
+                .fontWeight(.semibold)
                 .padding()
             
             Spacer()
             
-            Text(String("Cash: \(score)"))
-                .padding(/*@START_MENU_TOKEN@*/.horizontal, 25.0/*@END_MENU_TOKEN@*/)
+            Text(String("Credits: \(score)"))
+                .padding(.horizontal, 25.0)
                 .padding(.vertical, 10.0)
                 .background(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(15)
@@ -30,29 +35,41 @@ struct ContentView: View {
             Spacer()
             
             HStack() {
-                Image("apple")
+                Image("fruit\(slot1)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                Image("apple")
+                Image("fruit\(slot2)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                Image("apple")
+                Image("fruit\(slot1)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
+            .padding()
             
             Spacer()
             
-            Button {
-        
-            } label: {
-                Text("Spin")
+            Button ("Spin") {
+                // Randomize the numbers
+                slot1 = Int.random(in: 1...3)
+                slot2 = Int.random(in: 1...3)
+                slot3 = Int.random(in: 1...3)
+                
+                // Update credits based on match or not
+                if slot1 == slot2 && slot2 == slot3 {
+                    // Match
+                    score += 15
+                }
+                else {
+                    score -= 5
+                }
             }
-            .padding(.horizontal, 25.0)
-            .padding(.vertical, 6.0)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding()
             .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
 
-            .cornerRadius(15)
+            .cornerRadius(25)
+            .padding(.horizontal, 20)
             .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
             
             Spacer()
